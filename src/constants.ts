@@ -19,7 +19,7 @@ export const SOCIALS: Social[] = [
   {
     name: "GitHub",
     href: "https://github.com/daihuiao",
-    linkTitle: `${SITE.title} on GitHub`,
+    linkTitle: `在 GitHub 上查看 ${SITE.author}`,
     icon: IconGitHub,
   },
 ] as const;

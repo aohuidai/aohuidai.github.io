@@ -3,9 +3,9 @@ layout: ../layouts/AboutLayout.astro
 title: "关于"
 ---
 
-这里是 **daihuiao 的博客**。
+这里是 **Dai Huiao 的博客**。
 
-这个站点使用 [Astro](https://astro.build/) 和 [AstroPaper](https://github.com/satnaing/astro-paper) 搭建，部署在 GitHub Pages 上，目标很简单：用尽量少的维护成本，把想写的内容持续放出来。
+这个站点使用 [Astro](https://astro.build/) 和 [AstroPaper](https://github.com/satnaing/astro-paper) 搭建，部署在 GitHub Pages 上。它更像一个轻量的个人写作空间，用很少的维护成本，把值得记录的内容持续放出来。
 
 ## 这里会写什么
 

@@ -1,9 +1,10 @@
 export const SITE = {
   website: "https://daihuiao.github.io",
-  author: "daihuiao",
+  author: "Dai Huiao",
   profile: "https://github.com/daihuiao",
-  desc: "记录编程、工具、工作流和日常学习。",
-  title: "daihuiao 的博客",
+  avatar: "/avatar-daihuiao.png",
+  desc: "记录开发、工具、自动化和日常学习中的想法与实践。",
+  title: "Dai Huiao 的博客",
   ogImage: "",
   lightAndDarkMode: true,
   postPerIndex: 4,
