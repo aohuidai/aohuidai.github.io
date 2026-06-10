@@ -5,7 +5,7 @@ export const SITE = {
   avatar: "/avatar-daihuiao.png",
   desc: "记录开发、工具、自动化和日常学习中的想法与实践。",
   title: "Dai Huiao 的博客",
-  ogImage: "",
+  ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
   postPerPage: 4,
@@ -17,7 +17,7 @@ export const SITE = {
     text: "编辑此页",
     url: "https://github.com/daihuiao/daihuiao.github.io/edit/main/",
   },
-  dynamicOgImage: true,
+  dynamicOgImage: false,
   dir: "ltr", // "rtl" | "auto"
   lang: "zh-CN", // html lang code. Set this empty and default will be "en"
   timezone: "Asia/Shanghai", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones

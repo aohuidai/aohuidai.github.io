@@ -30,6 +30,20 @@ npm run preview
 
 ## 如何写新文章
 
+### Pages CMS 网页后台
+
+如果想直接在网页上写文章，使用 Pages CMS：
+
+1. 打开 [Pages CMS](https://app.pagescms.org/)
+2. 连接 GitHub 仓库 `daihuiao/daihuiao.github.io`
+3. 进入 `博客文章`
+4. 点 `New` 新建文章
+5. 填标题、摘要、标签和正文
+6. 确认要发布时，把 `草稿` 关掉
+7. 保存后等待 GitHub Actions 自动发布
+
+CMS 配置文件是 `.pages.yml`。它会把文章保存到 `src/data/blog/`，图片保存到 `public/blog-assets/`，并自动生成 AstroPaper 需要的 frontmatter。
+
 文章目录：
 
 ```text
@@ -60,7 +74,46 @@ draft: false
 
 这个仓库按 `daihuiao.github.io` 的用户站方式发布。
 
-发布流程：
+### 一键发布
+
+日常写完文章后，推荐用一键发布脚本：
+
+```bash
+npm run publish
+```
+
+脚本会按顺序做这些事：
+
+1. 检查当前是否有改动
+2. 执行 `npm run build`
+3. 构建成功后提交文章、图片和 README 改动
+4. 把当前分支推送到远端 `main`
+
+第一次使用或不确定时，可以先演练：
+
+```bash
+npm run publish:dry
+```
+
+需要自己指定提交信息时：
+
+```bash
+npm run publish -- --message "post: add my article"
+```
+
+### Typora 绑定方式
+
+Typora 里可以把下面这条命令配置成自定义导出命令或外部命令：
+
+```bash
+cd "/Users/daihuiao/cmd/github blog/.worktrees/astropaper-github-pages" && npm run publish
+```
+
+以后用 Typora 写完 Markdown 后，点这个命令即可发布。
+
+### 自动发布流程
+
+真正的线上发布流程：
 
 1. 代码 push 到 `main`
 2. GitHub Actions 自动执行构建
