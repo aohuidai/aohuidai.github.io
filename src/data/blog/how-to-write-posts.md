@@ -10,6 +10,32 @@ tags:
   - Markdown
 author: Dai Huiao
 ---
+这是我的第一篇博客文章。
+
+这个站点使用 **AstroPaper** 作为主题，托管在 **GitHub Pages**，通过 **GitHub Actions** 自动构建和发布。目标很简单：少花时间折腾环境，把更多时间留给写作本身。
+
+## 这篇文章的作用
+
+这篇文章主要用来验证三件事：
+
+1. Markdown 文章能被 Astro 正常识别和渲染
+2. 首页、文章页和标签页可以正常展示内容
+3. 推送到 GitHub 后，Pages 工作流能够自动发布
+
+## 后续怎么写新文章
+
+以后只需要在 `src/data/blog/` 目录里新建一个 Markdown 文件，并补上这些 frontmatter 字段：
+
+- `title`
+- `description`
+- `pubDatetime`
+- `tags`
+- `draft`
+
+正文部分就直接写 Markdown 即可。
+
+
+
 为了让以后写博客更轻松，我把流程控制在很少的几个步骤里。
 
 最省事的做法有两种：
