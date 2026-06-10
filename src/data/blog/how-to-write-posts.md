@@ -1,16 +1,15 @@
 ---
-author: Dai Huiao
-pubDatetime: 2026-03-21T14:10:00Z
 title: 以后我是怎么发文章的
-featured: false
+description: 这篇文章记录这个博客后续的基本写作和发布流程，方便自己以后回看。
+pubDatetime: 2026-03-21T14:10:00+00:00
 draft: false
+featured: true
 tags:
   - 写作
   - 工作流
   - Markdown
-description: 这篇文章记录这个博客后续的基本写作和发布流程，方便自己以后回看。
+author: Dai Huiao
 ---
-
 为了让以后写博客更轻松，我把流程控制在很少的几个步骤里。
 
 最省事的做法有两种：
