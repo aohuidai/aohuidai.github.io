@@ -8,7 +8,10 @@ tags:
   - 随笔
 author: Dai Huiao
 ---
-
 # [新的管理界面地址：](https://app.pagescms.org/daihuiao/daihuiao.github.io/main/collection/posts/new)
 
-[https://app.pagescms.org/daihuiao/daihuiao.github.io/main/collection](https://app.pagescms.org/daihuiao/daihuiao.github.io/main/collection/posts/new)
+[https://app.pagescms.org/daihuiao/daihuiao.github.io/main/collection](https://app.pagescms.org/daihuiao/daihuiao.github.io/main/collection/posts/new)  
+
+
+![image.png](/blog-assets/image.png)
+
