@@ -1,10 +1,10 @@
 export const SITE = {
-  website: "https://daihuiao.github.io",
-  author: "Dai Huiao",
-  profile: "https://github.com/daihuiao",
+  website: "https://aohuidai.github.io",
+  author: "Aohui Dai",
+  profile: "https://github.com/aohuidai",
   avatar: "/avatar-daihuiao.png",
   desc: "记录开发、工具、自动化和日常学习中的想法与实践。",
-  title: "Dai Huiao 的博客",
+  title: "Aohui Dai 的博客",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
@@ -15,7 +15,7 @@ export const SITE = {
   editPost: {
     enabled: true,
     text: "编辑此页",
-    url: "https://github.com/daihuiao/daihuiao.github.io/edit/main/",
+    url: "https://github.com/aohuidai/aohuidai.github.io/edit/main/",
   },
   dynamicOgImage: false,
   dir: "ltr", // "rtl" | "auto"

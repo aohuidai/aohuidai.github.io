@@ -1,4 +1,4 @@
-# daihuiao 的博客
+# aohuidai 的博客
 
 基于 [Astro](https://astro.build/) 和 [AstroPaper](https://github.com/satnaing/astro-paper) 搭建，部署到 GitHub Pages。
 
@@ -35,7 +35,7 @@ npm run preview
 如果想直接在网页上写文章，使用 Pages CMS：
 
 1. 打开 [Pages CMS](https://app.pagescms.org/)
-2. 连接 GitHub 仓库 `daihuiao/daihuiao.github.io`
+2. 连接 GitHub 仓库 `aohuidai/aohuidai.github.io`
 3. 进入 `博客文章`
 4. 点 `New` 新建文章
 5. 填标题、摘要、标签和正文
@@ -72,7 +72,7 @@ draft: false
 
 ## GitHub Pages 发布
 
-这个仓库按 `daihuiao.github.io` 的用户站方式发布。
+这个仓库按 `aohuidai.github.io` 的用户站方式发布。
 
 ### 一键发布
 

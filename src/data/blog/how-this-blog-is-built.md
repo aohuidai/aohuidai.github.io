@@ -37,16 +37,16 @@ Pages CMS 网页写作后台
 这个博客的线上地址是：
 
 ```text
-https://daihuiao.github.io/
+https://aohuidai.github.io/
 ```
 
 对应的 GitHub 仓库是：
 
 ```text
-daihuiao/daihuiao.github.io
+aohuidai/aohuidai.github.io
 ```
 
-它用的是 GitHub Pages 的用户主页形式。也就是说，仓库名正好是 `daihuiao.github.io`，推到 `main` 分支后，GitHub Pages 会把它发布成个人主页。
+它用的是 GitHub Pages 的用户主页形式。也就是说，仓库名正好是 `aohuidai.github.io`，推到 `main` 分支后，GitHub Pages 会把它发布成个人主页。
 
 项目本身不是传统服务器，也没有长期运行的 Node 服务。真正在线上被访问的是构建后的静态文件：
 
@@ -267,7 +267,7 @@ public/blog-assets/
 ```text
 打开 Pages CMS
   -> 登录 GitHub
-  -> 连接 daihuiao/daihuiao.github.io
+  -> 连接 aohuidai/aohuidai.github.io
   -> 进入「博客文章」
   -> 新建文章
   -> 填表单和正文
@@ -363,7 +363,7 @@ npm run build
   -> 提交到 GitHub main
   -> GitHub Actions 运行 Astro 构建
   -> GitHub Pages 发布静态文件
-  -> daihuiao.github.io 更新
+  -> aohuidai.github.io 更新
 ```
 
 记住这条线，就基本掌握了这个博客。
