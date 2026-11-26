@@ -14,7 +14,18 @@ test("dry run builds but does not commit or push", () => {
   });
 
   assert.deepEqual(calls, [
-    ["git", ["status", "--short", "--", "src/data/blog", "public", "README.md"]],
+    [
+      "git",
+      [
+        "status",
+        "--short",
+        "--",
+        "src/data/blog",
+        "src/data/downloads.json",
+        "public",
+        "README.md",
+      ],
+    ],
   ]);
 });
 
@@ -30,8 +41,22 @@ test("custom message is used for commit and current branch is pushed to main", (
   });
 
   assert.deepEqual(calls, [
-    ["git", ["status", "--short", "--", "src/data/blog", "public", "README.md"]],
-    ["git", ["add", "src/data/blog", "public", "README.md"]],
+    [
+      "git",
+      [
+        "status",
+        "--short",
+        "--",
+        "src/data/blog",
+        "src/data/downloads.json",
+        "public",
+        "README.md",
+      ],
+    ],
+    [
+      "git",
+      ["add", "src/data/blog", "src/data/downloads.json", "public", "README.md"],
+    ],
     ["git", ["commit", "-m", "post: add note"]],
     ["git", ["push", "origin", "HEAD:main"]],
   ]);
@@ -63,6 +88,17 @@ test("no changes exits before build, commit, and push", () => {
   });
 
   assert.deepEqual(calls, [
-    ["git", ["status", "--short", "--", "src/data/blog", "public", "README.md"]],
+    [
+      "git",
+      [
+        "status",
+        "--short",
+        "--",
+        "src/data/blog",
+        "src/data/downloads.json",
+        "public",
+        "README.md",
+      ],
+    ],
   ]);
 });

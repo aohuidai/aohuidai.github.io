@@ -1,0 +1,92 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Main from "@/layouts/Main.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import AttachmentList from "@/components/AttachmentList.astro";
+import IconPaperclip from "@/assets/icons/IconPaperclip.svg";
+import getSortedPosts from "@/utils/getSortedPosts";
+import { getPath } from "@/utils/getPath";
+import {
+  loadStandaloneDownloads,
+  resolvePostAttachments,
+} from "@/utils/attachments";
+import { SITE } from "@/config";
+
+const posts = await getCollection("blog");
+const publishedPosts = getSortedPosts(posts);
+
+const standaloneDownloads = loadStandaloneDownloads();
+const postAttachments = publishedPosts.flatMap(post =>
+  resolvePostAttachments(post.data, {
+    sourcePost: {
+      title: post.data.title,
+      href: getPath(post.id, post.filePath),
+      pubDatetime: post.data.pubDatetime,
+    },
+  })
+);
+
+const totalCount = standaloneDownloads.length + postAttachments.length;
+---
+
+<Layout title={`资源下载 | ${SITE.title}`}>
+  <Header />
+  <Main
+    pageTitle="资源下载"
+    pageDesc="这里汇总了博客独立共享的文件，以及各篇文章附带的资料与附件，点击即可直接下载。"
+  >
+    <div data-pagefind-body>
+      <div
+        class="mb-6 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border bg-muted/20 px-4 py-3 text-sm"
+      >
+        <div class="flex items-center gap-2">
+          <IconPaperclip class="size-4 text-accent" />
+          <span>
+            当前共有 <strong>{totalCount}</strong> 个可下载文件
+          </span>
+        </div>
+        <span class="text-xs opacity-75">
+          站内直链支持一键下载，部分格式支持在线预览
+        </span>
+      </div>
+
+      {
+        standaloneDownloads.length > 0 && (
+          <AttachmentList
+            id="standalone-downloads"
+            title="独立资源"
+            description="不绑定特定文章的共享文件与常用资料"
+            attachments={standaloneDownloads}
+          />
+        )
+      }
+
+      {
+        postAttachments.length > 0 && (
+          <AttachmentList
+            id="post-attachments"
+            title="文章附件汇总"
+            description="按文章发布时间倒序整理"
+            attachments={postAttachments}
+            showSourcePost={true}
+          />
+        )
+      }
+
+      {
+        totalCount === 0 && (
+          <div class="rounded-xl border border-dashed border-border p-8 text-center opacity-80">
+            <p class="font-medium">暂时还没有公开附件。</p>
+            <p class="mt-2 text-sm">
+              在 Pages CMS
+              编辑文章时拖入附件，或在「独立资源下载」中添加文件后，这里会自动展示。
+            </p>
+          </div>
+        )
+      }
+    </div>
+  </Main>
+  <Footer />
+</Layout>

@@ -9,6 +9,13 @@ draft: true
 tags:
   - 示例
   - 博客
+# attachments:
+#   - /attachments/示例文件.pdf
+# externalAttachments:
+#   - name: 大文件安装包.zip
+#     url: https://github.com/aohuidai/aohuidai.github.io/releases/download/attachments/demo.zip
+#     size: 25 MB
+#     note: GitHub Release 直链
 ---
 
 这里开始写正文。

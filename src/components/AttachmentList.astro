@@ -1,0 +1,180 @@
+---
+import IconPaperclip from "@/assets/icons/IconPaperclip.svg";
+import IconDownload from "@/assets/icons/IconDownload.svg";
+import IconExternalLink from "@/assets/icons/IconExternalLink.svg";
+import type { ResolvedAttachment } from "@/utils/attachments";
+
+type Props = {
+  attachments: ResolvedAttachment[];
+  title?: string;
+  description?: string;
+  showSourcePost?: boolean;
+  id?: string;
+};
+
+const {
+  attachments,
+  title = "文章附件",
+  description,
+  showSourcePost = false,
+  id = "attachments",
+} = Astro.props;
+---
+
+{
+  attachments.length > 0 && (
+    <section
+      id={id}
+      aria-labelledby={`${id}-heading`}
+      class="mt-10 rounded-xl border border-border bg-muted/25 p-4 sm:p-5"
+    >
+      <div class="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-border pb-3">
+        <div class="flex items-center gap-2">
+          <IconPaperclip class="size-5 shrink-0 text-accent" />
+          <h2 id={`${id}-heading`} class="text-lg font-semibold">
+            {title}
+          </h2>
+          <span class="rounded-full bg-muted px-2 py-0.5 text-xs font-medium opacity-80">
+            {attachments.length}
+          </span>
+        </div>
+        {description && <p class="text-xs opacity-75">{description}</p>}
+      </div>
+
+      <ul class="space-y-3">
+        {attachments.map(item => (
+          <li class="flex flex-col gap-3 rounded-lg border border-border bg-background/90 p-3.5 transition-colors hover:border-accent/60 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex min-w-0 items-start gap-3">
+              <span
+                class:list={[
+                  "mt-0.5 inline-flex shrink-0 items-center justify-center rounded-md border px-2 py-1 text-[11px] font-bold tracking-wider",
+                  item.isExternal
+                    ? "border-accent/40 bg-accent/10 text-accent"
+                    : "border-border bg-muted/60 text-foreground",
+                ]}
+              >
+                {item.typeLabel}
+              </span>
+
+              <div class="min-w-0 space-y-1">
+                <div class="truncate font-medium" title={item.name}>
+                  {item.name}
+                </div>
+
+                <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs opacity-75">
+                  {item.size && <span>{item.size}</span>}
+                  {item.isExternal ? (
+                    <span>{item.hostLabel ?? "外链资源"}</span>
+                  ) : (
+                    <span>站内直链</span>
+                  )}
+                  {item.category && (
+                    <span class="rounded bg-muted px-1.5 py-0.5">
+                      {item.category}
+                    </span>
+                  )}
+                  {item.updatedAt && <span>更新于 {item.updatedAt}</span>}
+                </div>
+
+                {item.note && (
+                  <p class="text-xs leading-relaxed opacity-85">{item.note}</p>
+                )}
+
+                {showSourcePost && item.sourcePost && (
+                  <p class="text-xs opacity-80">
+                    来自文章：
+                    <a
+                      href={item.sourcePost.href}
+                      class="text-accent decoration-dashed underline-offset-4 hover:underline"
+                    >
+                      {item.sourcePost.title}
+                    </a>
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div class="flex shrink-0 flex-wrap items-center gap-2 sm:justify-end">
+              {item.previewable && !item.isExternal && (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 text-xs font-medium hover:border-accent hover:text-accent"
+                >
+                  <IconExternalLink class="size-3.5" />
+                  <span>预览</span>
+                </a>
+              )}
+
+              <button
+                type="button"
+                data-copy-attachment-url={item.href}
+                data-is-external={item.isExternal ? "true" : "false"}
+                class="inline-flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 text-xs font-medium hover:border-accent hover:text-accent"
+              >
+                复制链接
+              </button>
+
+              {item.isExternal ? (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 rounded-md bg-accent px-3 py-1.5 text-xs font-medium text-background hover:opacity-90"
+                >
+                  <IconExternalLink class="size-3.5" />
+                  <span>前往下载</span>
+                </a>
+              ) : (
+                <a
+                  href={item.href}
+                  download={item.downloadName}
+                  class="inline-flex items-center gap-1.5 rounded-md bg-accent px-3 py-1.5 text-xs font-medium text-background hover:opacity-90"
+                >
+                  <IconDownload class="size-3.5" />
+                  <span>下载</span>
+                </a>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<script is:inline data-astro-rerun>
+  function bindAttachmentCopyButtons() {
+    const buttons = document.querySelectorAll("[data-copy-attachment-url]");
+    for (const button of buttons) {
+      if (button.dataset.copyBound === "true") continue;
+      button.dataset.copyBound = "true";
+
+      button.addEventListener("click", async () => {
+        const rawHref = button.dataset.copyAttachmentUrl || "";
+        const isExternal = button.dataset.isExternal === "true";
+        const fullUrl = isExternal
+          ? rawHref
+          : new URL(rawHref, window.location.origin).href;
+
+        try {
+          await navigator.clipboard.writeText(fullUrl);
+          const original = button.textContent || "复制链接";
+          button.textContent = "已复制";
+          setTimeout(() => {
+            button.textContent = original;
+          }, 1500);
+        } catch {
+          button.textContent = "复制失败";
+          setTimeout(() => {
+            button.textContent = "复制链接";
+          }, 1500);
+        }
+      });
+    }
+  }
+
+  bindAttachmentCopyButtons();
+  document.addEventListener("astro:after-swap", bindAttachmentCopyButtons);
+</script>

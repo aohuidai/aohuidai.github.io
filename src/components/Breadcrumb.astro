@@ -12,6 +12,11 @@ if (breadcrumbList[0] === "posts") {
   breadcrumbList.splice(0, 2, `Posts (page ${breadcrumbList[1] || 1})`);
 }
 
+// if breadcrumb is Home > Downloads
+if (breadcrumbList[0] === "downloads") {
+  breadcrumbList.splice(0, 1, "资源下载");
+}
+
 // if breadcrumb is Home > Tags > [tag] > [page] <etc>
 // replace [tag] > [page] with [tag] (page number)
 if (breadcrumbList[0] === "tags" && !isNaN(Number(breadcrumbList[2]))) {

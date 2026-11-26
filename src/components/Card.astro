@@ -2,6 +2,8 @@
 import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "@/utils/slugify";
 import { getPath } from "@/utils/getPath";
+import { countPostAttachments } from "@/utils/attachments";
+import IconPaperclip from "@/assets/icons/IconPaperclip.svg";
 import Datetime from "./Datetime.astro";
 
 type Props = {
@@ -11,6 +13,7 @@ type Props = {
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
 const { title, description, ...props } = data;
+const attachmentCount = countPostAttachments(data);
 ---
 
 <li class="my-6">
@@ -28,6 +31,16 @@ const { title, description, ...props } = data;
       {title}
     </Heading>
   </a>
-  <Datetime {...props} />
+  <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+    <Datetime {...props} />
+    {
+      attachmentCount > 0 && (
+        <span class="inline-flex items-center gap-1 rounded-full border border-border bg-muted/40 px-2 py-0.5 text-xs opacity-85">
+          <IconPaperclip class="size-3.5 text-accent" />
+          <span>{attachmentCount} 个附件</span>
+        </span>
+      )
+    }
+  </div>
   <p>{description}</p>
 </li>

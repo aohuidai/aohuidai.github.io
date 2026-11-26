@@ -1,10 +1,16 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 const repoRoot = path.resolve(fileURLToPath(import.meta.url), "../..");
-const publishPaths = ["src/data/blog", "public", "README.md"];
+const publishPaths = [
+  "src/data/blog",
+  "src/data/downloads.json",
+  "public",
+  "README.md",
+];
 
 function parseArgs(argv) {
   const options = {

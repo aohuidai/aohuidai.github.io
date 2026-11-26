@@ -42,7 +42,23 @@ npm run preview
 6. 确认要发布时，把 `草稿` 关掉
 7. 保存后等待 GitHub Actions 自动发布
 
-CMS 配置文件是 `.pages.yml`。它会把文章保存到 `src/data/blog/`，图片保存到 `public/blog-assets/`，并自动生成 AstroPaper 需要的 frontmatter。
+CMS 配置文件是 `.pages.yml`。它会把文章保存到 `src/data/blog/`，图片保存到 `public/blog-assets/`，附件保存到 `public/attachments/`，独立资源列表保存到 `src/data/downloads.json`，并自动生成 AstroPaper 需要的 frontmatter。
+
+### 如何给文章添加可下载附件
+
+1. **常规文件（≤ 3MB，PDF / Office / ZIP / 脚本 / 配置等）**：
+   - 在 Pages CMS 打开任意文章，拖到页面底部的 **「附件（直接上传）」**，直接拖放文件或点击 `Upload` 上传即可（支持一次挂多个文件，也支持保留中文文件名）。
+   - 保存后等待 GitHub Actions 构建完成，文章底部会自动出现带文件大小、在线预览和一键下载按钮的 **「文章附件」** 卡片，且自动汇总到网站导航栏的 **「资源」(`/downloads`)** 页面。
+2. **中等文件（3MB – 25MB）**：
+   - 因为 Pages CMS 托管接口单次上传有约 4.5MB 请求体限制（base64 后约 3MB 文件），可将文件通过 Git 或 GitHub 网页直接放入 `public/attachments/`，再在 Pages CMS 附件栏点 `Select` 选中即可。
+3. **大文件（> 3MB，最大支持单文件 2GB）**：
+   - 在本地运行一条命令自动上传到本仓库 GitHub Releases 并生成直链：
+     ```bash
+     npm run upload:release -- /路径/到你的大文件.zip
+     ```
+   - 把输出的链接填入 Pages CMS 文章底部的 **「外链 / 大文件附件（可选）」**（或者直接贴网盘链接与提取码）。
+4. **独立共享文件（不写文章也能分享）**：
+   - 在 Pages CMS 左侧点 **「独立资源下载」**，添加文件或外链并保存，就会直接显示在 `https://aohuidai.github.io/downloads/`。
 
 文章目录：
 

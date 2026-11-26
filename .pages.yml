@@ -1,6 +1,14 @@
 media:
-  input: public/blog-assets
-  output: /blog-assets
+  - name: assets
+    label: 图片素材
+    input: public/blog-assets
+    output: /blog-assets
+    rename: false
+  - name: attachments
+    label: 文章附件
+    input: public/attachments
+    output: /attachments
+    rename: false
 
 content:
   - name: posts
@@ -18,8 +26,12 @@ content:
         - draft
         - tags
       primary: title
-      sort: pubDatetime
-      order: desc
+      sort:
+        - pubDatetime
+        - title
+      default:
+        sort: pubDatetime
+        order: desc
     fields:
       - name: title
         label: 标题
@@ -58,3 +70,79 @@ content:
         label: 正文
         type: rich-text
         required: true
+      - name: attachments
+        label: 附件（直接上传）
+        description: 拖放或点击上传任意文件（PDF/Office/ZIP/代码等），网页直传单文件建议 ≤ 3MB；更大文件可先传到仓库 public/attachments 再点 Select 选中，或填下方外链附件。
+        type: file
+        options:
+          media: attachments
+          multiple: true
+          unique: true
+          rename: false
+      - name: externalAttachments
+        label: 外链 / 大文件附件（可选）
+        description: 适合大于 3MB 的文件（如 GitHub Releases 直链、网盘链接），或需要单独填写说明与提取码的附件。
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name}"
+        fields:
+          - name: name
+            label: 显示名称
+            type: string
+            required: true
+          - name: url
+            label: 下载链接
+            type: string
+            required: true
+          - name: size
+            label: 文件大小（可选）
+            type: string
+          - name: note
+            label: 说明 / 提取码（可选）
+            type: string
+
+  - name: downloads
+    label: 独立资源下载
+    description: 不写文章也能直接在这里上传或添加共享文件，保存后会自动显示在网站「资源」页面。
+    path: src/data/downloads.json
+    type: file
+    format: json
+    fields:
+      - name: items
+        label: 资源列表
+        type: object
+        list:
+          collapsible:
+            collapsed: false
+            summary: "{title}"
+        fields:
+          - name: title
+            label: 资源名称
+            type: string
+            required: true
+          - name: description
+            label: 资源说明（可选）
+            type: text
+          - name: file
+            label: 上传文件（≤ 3MB）
+            type: file
+            options:
+              media: attachments
+              rename: false
+          - name: url
+            label: 或外链地址（大文件 / GitHub Release / 网盘）
+            type: string
+          - name: size
+            label: 文件大小（可选，本地文件自动读取）
+            type: string
+          - name: category
+            label: 分类（可选）
+            type: string
+            default: 常用资料
+          - name: updatedAt
+            label: 更新日期（可选）
+            type: date
+            options:
+              format: yyyy-MM-dd

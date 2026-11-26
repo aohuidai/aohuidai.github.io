@@ -54,7 +54,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
             这个站点基于 AstroPaper，托管在 GitHub Pages 上，目标很直接：
             少折腾，稳定写，想到什么就能很快发出来。
           </p>
-          <div class="mt-5 flex flex-wrap gap-4">
+          <div class="mt-5 flex flex-wrap gap-3">
             <LinkButton
               href="/posts/"
               class="rounded-full border border-border px-4 py-2 hover:border-accent"
@@ -62,12 +62,18 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
               看文章
             </LinkButton>
             <LinkButton
-              href="https://github.com/aohuidai/aohuidai.github.io"
+              href="/downloads/"
+              class="rounded-full border border-border px-4 py-2 hover:border-accent"
+            >
+              资源下载
+            </LinkButton>
+            <LinkButton
+              href="https://app.pagescms.org/aohuidai/aohuidai.github.io/main/collection/posts"
               target="_blank"
               rel="noreferrer"
               class="rounded-full border border-border px-4 py-2 hover:border-accent"
             >
-              去 GitHub 写文章
+              写文章后台
             </LinkButton>
           </div>
         </div>

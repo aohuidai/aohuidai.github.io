@@ -20,6 +20,21 @@ const blog = defineCollection({
       canonicalURL: z.string().optional(),
       hideEditPost: z.boolean().optional(),
       timezone: z.string().optional(),
+      attachments: z
+        .union([z.string(), z.array(z.string())])
+        .optional()
+        .nullable(),
+      externalAttachments: z
+        .array(
+          z.object({
+            name: z.string(),
+            url: z.string(),
+            size: z.string().optional().nullable(),
+            note: z.string().optional().nullable(),
+          })
+        )
+        .optional()
+        .nullable(),
     }),
 });
 

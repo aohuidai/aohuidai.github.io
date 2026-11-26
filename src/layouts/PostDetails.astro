@@ -9,10 +9,13 @@ import EditPost from "@/components/EditPost.astro";
 import ShareLinks from "@/components/ShareLinks.astro";
 import BackButton from "@/components/BackButton.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
+import AttachmentList from "@/components/AttachmentList.astro";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
+import { resolvePostAttachments } from "@/utils/attachments";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
 import IconChevronRight from "@/assets/icons/IconChevronRight.svg";
+import IconPaperclip from "@/assets/icons/IconPaperclip.svg";
 import { SITE } from "@/config";
 
 type Props = {
@@ -36,6 +39,7 @@ const {
 } = post.data;
 
 const { Content } = await render(post);
+const postAttachments = resolvePostAttachments(post.data);
 
 let ogImageUrl: string | undefined;
 
@@ -96,7 +100,7 @@ const nextPost =
     >
       {title}
     </h1>
-    <div class="my-2 flex items-center gap-2">
+    <div class="my-2 flex flex-wrap items-center gap-2">
       <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
       <span
         aria-hidden="true"
@@ -106,6 +110,22 @@ const nextPost =
         ]}>|</span
       >
       <EditPost {hideEditPost} {post} class="max-sm:hidden" />
+      {
+        postAttachments.length > 0 && (
+          <>
+            <span aria-hidden="true" class="opacity-60">
+              |
+            </span>
+            <a
+              href="#attachments"
+              class="inline-flex items-center gap-1 rounded-full border border-border bg-muted/40 px-2.5 py-0.5 text-sm text-accent hover:border-accent"
+            >
+              <IconPaperclip class="size-4" />
+              <span>{postAttachments.length} 个附件</span>
+            </a>
+          </>
+        )
+      }
     </div>
     <article
       id="article"
@@ -113,6 +133,8 @@ const nextPost =
     >
       <Content />
     </article>
+
+    <AttachmentList attachments={postAttachments} />
 
     <hr class="my-8 border-dashed" />
 
@@ -137,7 +159,7 @@ const nextPost =
             class="flex w-full gap-1 hover:opacity-75"
           >
             <IconChevronLeft class="inline-block flex-none rtl:rotate-180" />
-              <div>
+            <div>
               <span>上一篇</span>
               <div class="text-sm text-accent/85">{prevPost.title}</div>
             </div>
